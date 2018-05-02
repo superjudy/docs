@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>vs</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		body{
+			position: relative;
+		}
+		div{
+			width: 50px;
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+			font-size: 14px;
+			color: #fff;
+			background: orange;
+			position: absolute;
+			left: 0;
+			top:0;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			for(var i=0; i<20; i++){
+				document.body.innerHTML += "<div>"+i+"</div>"
+			}
+			var div = document.getElementsByTagName('div');
+			var num = div.length;
+			for(var i=0; i<num; i++){
+				div[i].style.top = i*50 + "px";
+				div[i].style.left = i*50 + "px";
+			}
+			for(var i=num/2,j=num/2; i<num,j>0; i++,j--){
+				div[i].style.left = i*50 + "px";
+				div[i].style.top = (j-1)*50 + "px";
+			}
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
