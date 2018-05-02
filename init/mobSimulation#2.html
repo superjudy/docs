@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mobSimulation</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		#box{
+			width: 360px;
+			height: 600px;
+			border:1px solid #333;
+			margin:10px auto;
+		}
+		#up{
+			width: 340px;
+			height: 530px;
+			margin:10px auto;
+			background: #f1f1f1;
+			overflow: auto;
+		}
+		#down{
+			width: 340px;
+			height: 40px;
+			margin:0 auto;
+		}
+		#imgUrl{
+			width: 40px;
+			height: 40px;
+			border-radius: 50%;
+			display: block;
+			float: left;
+			cursor: pointer;
+		}
+		input{
+			outline: none;
+			border:none;
+			border-radius: 6px;
+			margin-top:5px;
+		}
+		#iptText{
+			width: 210px;
+			height: 26px;
+			padding: 2px 5px;
+			line-height: 26px;
+			font-size: 14px;
+			float: left;
+			margin-left: 10px;
+			background: #e4e4e4;
+		}
+		#iptBtn{
+			width: 60px;
+			height:30px;
+			line-height: 30px;
+			float: right;
+			cursor: pointer;
+		}
+		.fl,.fl img,.fl p{
+			float: left;
+		}
+		.fr,.fr img,.fr p{
+			float: right;
+		}
+		li{
+			width: 340px;
+			overflow: hidden;
+			margin:5px 0;
+		}
+		li img{
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+		}
+		li p{
+			line-height: 30px;
+			font-size: 14px;
+			max-width: 260px;
+			word-break: break-all;
+			margin:0 5px;
+			padding:0 5px;
+			border-radius: 6px;
+		}
+		.fr p{
+			background: green;
+			color:#fff;
+		}
+		.fl p{
+			background: #ccc;
+			color:#333;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var imgUrl = document.getElementById('imgUrl');
+			var up = document.getElementById('up');
+			var iptText = document.getElementById('iptText');
+			var iptBtn = document.getElementById('iptBtn');
+
+			var onOff = true;
+			imgUrl.onclick = function(){
+				if( onOff ){
+					imgUrl.src = 'img/2.jpg';
+				}else{
+					imgUrl.src = 'img/1.jpg'
+				}
+				onOff = !onOff;
+			}
+
+			iptBtn.onclick = function(){
+				if( onOff ){
+					up.innerHTML += '<li class="fl"><img src="img/1.jpg" /><p>'+ iptText.value +'</p></li>'
+				}else{
+					up.innerHTML += '<li class="fr"><img src="img/2.jpg" /><p>'+ iptText.value +'</p></li>'
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<div id="box">
+	<ul id="up">
+	</ul>
+	<div id="down">
+		<img src="img/1.jpg" id="imgUrl"/>
+		<input type="text" id="iptText"/>
+		<input type="button" value="提交" id="iptBtn"/>
+	</div>
+</div>
+</body>
+</html>
