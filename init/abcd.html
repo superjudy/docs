@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>abcd</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		input{
+			width: 60px;
+			height: 60px;
+			font-size: 40px;
+			font-weight: bold;
+			line-height: 60px;
+			margin:10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ipt = document.getElementsByTagName('input');
+			var arr = ['A','B','C','D'];
+
+			for(var i=0; i<arr.length; i++){
+				ipt[i].num = 0;
+				ipt[i].onclick = function(){
+					this.value = arr[this.num];
+					this.num++;
+					if( this.num === arr.length ){
+						this.num = 0;
+					}
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<input type="button" value="0" />
+<input type="button" value="0" />
+<input type="button" value="0" />
+</body>
+</html>
