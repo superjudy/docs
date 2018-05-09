@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>qq_menu</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		#ul{
+			width: 300px;
+			margin:20px auto;
+			background: #f1f1f1;
+		}
+		#ul li ul{
+			display: none;
+		}
+		#ul li ul li{
+			font-size: 14px;
+			line-height: 30px;
+			padding-left:20px;
+			border-bottom:1px solid #e6e6e6;
+		}
+		h2{
+			padding-left:10px;
+			font-size: 16px;
+			height:30px;
+			line-height: 30px;
+			border:1px solid #999;
+			background: #ccc;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var oUl = document.getElementById('ul');
+			var aUl = oUl.getElementsByTagName('ul');
+			var h2 = document.getElementsByTagName('h2');
+			var aLi = null;
+			var arrLi = [];
+
+			for(var i = 0; i < h2.length; i++){
+				h2[i].index = i;
+				h2[i].onOff = true;
+				h2[i].onclick = function(){
+					if( !this.onOff ){
+						aUl[this.index].style.display = 'none';
+					}else{
+						aUl[this.index].style.display = 'block';
+					}
+					this.onOff = !this.onOff;
+				}
+ 			}
+
+ 			for(var i = 0; i < aUl.length; i++){
+ 				aLi = aUl[i].getElementsByTagName('li');
+ 				for (var j = 0; j < aLi.length; j++){
+ 					arrLi.push(aLi[j]);
+ 				}
+ 			}
+			console.log(arrLi);
+
+			for(var i = 0; i < arrLi.length; i++){
+				arrLi[i].onmouseover = function(){
+					for(var j = 0; j < arrLi.length; j++){
+						arrLi[j].style.backgroundColor = '';
+					}
+					this.style.backgroundColor = 'red';
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul id="ul">
+		<li>
+			<h2>我的好友</h2>
+			<ul>
+				<li>张三</li>
+				<li>张三</li>
+				<li>张三</li>
+				<li>张三</li>
+				<li>张三</li>
+			</ul>
+		</li>
+		<li>
+			<h2>我的好友2</h2>
+			<ul>
+				<li>张三三</li>
+				<li>张三</li>
+				<li>张三</li>
+				<li>张三</li>
+			</ul>
+		</li>
+		<li>
+			<h2>我的好友3</h2>
+			<ul>
+				<li>张三四</li>
+				<li>张三</li>
+				<li>张三</li>
+			</ul>
+		</li>
+	</ul>
+</body>
+</html>
