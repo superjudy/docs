@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>img-tab-groups</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		.box{
+			width: 760px;
+			margin:50px auto 0;
+			background: #ccc;
+			padding:20px;
+		}
+		button{
+			width: 100px;
+			height:30px;
+			line-height: 30px;
+			border-radius: 7px;
+			background: #fff;
+			border:none;
+			outline: none;
+			border:1px solid #999;
+			cursor: pointer;
+			margin:10px;
+		}
+		.box-out{
+			overflow: hidden;
+		}
+		#boxA{
+			width: 400px;
+			height:300px;
+			overflow: hidden;
+			margin:10px;
+			padding:15px 15px 50px 15px;
+			background: #fff;
+			float:left;
+			position: relative;
+		}
+		#boxB{
+			width: 225px;
+			height: 300px;
+			padding:15px 15px 50px 15px;
+			background: #fff;
+			margin:10px;
+			float: right;
+			position: relative;
+		}
+		span{
+			width: 300px;
+			height:20px;
+			position: absolute;
+			left: 0;
+			bottom: 18px;
+			z-index: 9;
+			color:#333;
+			margin-left: 30px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btns = document.getElementsByTagName('button');
+			var imgs = document.getElementsByTagName('img');
+			var spans = document.getElementsByTagName('span');
+
+			// var arrUrlA = ['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg'];
+			// var arrUrlB = ['img3/1.jpg','img3/2.jpg','img3/3.jpg','img3/4.jpg'];
+
+			var arrUrl = [
+				['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg'],
+				['img3/1.jpg','img3/2.jpg','img3/3.jpg','img3/4.jpg']
+			]
+
+			var n = 0;
+			var m = 0;
+
+			function init() {
+				imgs[0].src = arrUrl[0][n];
+				imgs[1].src = arrUrl[1][m];
+				spans[0].innerHTML = 1 + n + ' / ' + arrUrl[0].length;
+				spans[1].innerHTML = 1 + m + ' / ' + arrUrl[1].length;
+			}
+			init();
+
+			for(var i = 0; i < imgs.length; i++){
+				imgs[i].num = 0;
+				imgs[i].index = i;
+				imgs[i].onclick = function(){
+					this.num ++;
+					if( this.num == arrUrl[this.index].length){
+						this.num = 0;
+					}
+					imgs[this.index].src = arrUrl[this.index][this.num];
+					spans[this.index].innerHTML = 1 + this.num + ' / ' + arrUrl[this.index].length;
+				}
+			}
+
+
+			btns[0].onclick = function(){
+				n ++;
+				m ++;
+				if( n == arrUrl[0].length ){
+					n = 0;
+				}
+				if( m == arrUrl[1].length ){
+					m = 0;
+				}
+				init();
+			}
+
+			btns[1].onclick =function(){
+				n --;
+				m --;
+				if( n < 0 ){
+					n = arrUrl[0].length - 1;
+				}
+				if( m < 0 ){
+					m = arrUrl[1].length - 1;
+				}
+				init();
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="box">
+	<p>
+		<button>上一组</button>
+		<button>下一组</button>
+	</p>
+	<div class="box-out">
+		<div id="boxA">
+			<img src="img2/1.jpg"/>
+			<span></span>
+		</div>
+		<div id="boxB">
+			<img src="img3/1.jpg"/>
+			<span></span>
+		</div>
+	</div>
+</div>
+</body>
+</html>

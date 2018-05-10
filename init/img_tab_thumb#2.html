@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>img-tab-thumb</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		body{
+			position: relative;
+			overflow: hidden;
+		}
+		.blur{
+			width: 100%;
+			height:100%;
+			position: absolute;
+			left: 0;
+			top: 0;
+			background-repeat: no-repeat;
+			background-position: 0 center;
+			background-size: cover;
+			-webkit-filter: blur(5px);
+			filter: blur(5px);			
+		}
+		div{
+			width: 400px;
+			height: 300px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -240px 0 0 -215px;
+			border:15px solid rgba(255,255,255,.5);
+		}
+		div img{
+			width: 100%;
+			display: block;
+		}
+		a{
+			width: 30px;
+			height:30px;
+			border-radius: 50%;
+			background: rgba(255,255,255,.3);
+			display: block;
+			color:#fff;
+			text-decoration: none;
+			line-height: 30px;
+			text-align: center;
+			font-size: 20px;
+			position: absolute;
+			top: 135px;
+		}
+		#a1{
+			left: 10px;
+		}
+		#a2{
+			right: 10px;
+		}
+		.a-active{
+			background: rgba(255,255,255,.6);
+		}
+		ul{
+			width: 100%;
+			height:20px;
+			position: absolute;
+			left: 0;
+			bottom: -80px;
+			text-align: center;
+		}
+		li{
+			width: 20px;
+			height: 20px;
+			display: inline-block;
+			border-radius: 50%;
+			background: rgba(255,255,255,.3);
+			margin: 0 5px;
+			position: relative;
+		}
+		.li-active{
+			background: rgba(255,255,255,.8);
+		}
+		div li img{
+			position: absolute;
+			top: -66px;
+			left: -25px;
+			width: 60px;
+			display: none;
+			border:5px solid rgba(255,255,255,.5);
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var div = document.getElementsByTagName('div')[0];
+			var as = div.getElementsByTagName('a');
+			var img = div.getElementsByTagName('img')[0];
+			var ul = div.getElementsByTagName('ul')[0];
+			var lis = ul.getElementsByTagName('li');
+			var arrUrl = ['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg'];
+			var num = 0;
+
+			function liClassTab(){
+				for(var i = 0; i < lis.length; i++){
+					lis[i].className = '';
+				}
+				lis[num].className = 'li-active';
+			}
+			
+			function setIn(){
+				num ++;
+				if( num == arrUrl.length ){
+					num = 0;
+				}
+				img.src = arrUrl[num];
+				liClassTab();	
+			}
+
+			var timer = setInterval(setIn,1000);
+
+			div.onmouseover = function(){
+				for(var i = 0; i < as.length; i++){
+					as[i].className = 'a-active';
+				}
+				clearInterval(timer);
+			}
+
+			div.onmouseout = function(){
+				for(var i = 0; i < as.length; i++){
+					as[i].className = '';
+				}
+				timer = setInterval(setIn,1000);
+			}
+			
+			as[1].onclick = function(){
+				setIn();
+			}	
+
+			as[0].onclick = function(){
+				num --;
+				if( num < 0 ){
+					num = arrUrl.length - 1;
+				}
+				img.src = arrUrl[num];
+				liClassTab();
+			}
+
+			for(var i = 0; i < lis.length; i++){
+				lis[i].index = i;
+				lis[i].onmouseover = function(){
+					num = this.index;
+					this.children[0].style.display = "block";
+					this.children[0].src = arrUrl[this.index];
+					liClassTab();
+				}
+
+				lis[i].onmouseout = function(){
+					this.children[0].style.display = "none";
+				}
+
+				lis[i].onclick = function(){
+					num = this.index;
+					img.src = arrUrl[num];
+				}	
+			}
+		}
+	</script>
+</head>
+<body>
+	<img src="img2/bg2.jpg" class="blur"/>
+	<div>
+		<img src="img2/1.jpg"/>
+		<a href="javascript:;" id="a1">&lt;</a>
+		<a href="javascript:;" id="a2">&gt;</a>
+		<ul id="listbox">
+			<li class="li-active">
+				<img src=""/>
+			</li>
+			<li>
+				<img src=""/>
+			</li>
+			<li>
+				<img src=""/>
+			</li>
+			<li>
+				<img src=""/>
+			</li>
+			<li>
+				<img src=""/>
+			</li>
+		</ul>
+	</div>
+</body>
+</html>
