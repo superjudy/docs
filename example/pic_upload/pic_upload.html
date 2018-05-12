@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pic-upload</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			font-size: 14px;
+		}
+		div.box{
+			width: 1100px;
+			overflow: hidden;
+			margin:10px auto;
+		}
+		div.upload{
+			width: 500px;
+			float: left;
+			padding:10px;
+			border:1px solid #eee;
+		}
+		input{
+			outline: none;
+			background: none;
+			border-radius: 6px;
+			border:1px solid #ccc;
+		}
+		#pic{
+			width: 500px;
+			min-height: 300px;
+			background: #ccc;
+			display: block;
+			margin:10px 0;
+		}
+		.ipt-bg{
+			width: 500px;
+			height:40px;
+			overflow: hidden;
+			position: relative;
+		}
+		.ipt-bg>div{
+			width: 230px;
+			height: 30px;
+			line-height: 30px;
+			text-align: center;
+			background: #eee;
+			border-radius: 6px;
+			border:1px solid #ccc;
+			position: absolute;
+			left:0;
+			top:0;
+			margin:0;
+		}
+		#ipt{
+			width: 230px;
+			height: 30px;
+			float: left;
+			opacity: 0;
+			position: absolute;
+			left:0;
+			top:0;
+			z-index: 9;
+		}
+		.ipt-bg input:last-child{
+			width: 220px;
+			height:20px;
+			line-height: 20px;
+			float: right;
+			padding:5px 5px 5px 10px;
+		}
+		#qrcode_text,
+		#pic_url,
+		#password{
+			width: 480px;
+			height:20px;
+			line-height: 20px;
+			padding:5px;
+		}
+		p{
+			width: 500px;
+			border:none;
+			border-top:1px solid #eee;
+			padding-top:15px;
+			margin-top:15px;
+			line-height: 30px;
+		}
+		#qrcode{
+			width: 256px;
+			background: #ccc;
+			min-height: 256px;
+			margin:0 auto 20px;
+		}
+		#qrcode img{
+			width: 256px;
+			height:256px;
+			display: block;
+		}
+		div.produce{
+			width: 500px;
+			float: right;
+			padding:10px;
+			border:1px solid #eee;
+		}
+		#btn{
+			width: 200px;
+			height:30px;
+			line-height: 30px;
+			cursor: pointer;
+		}
+		#qrcode{
+			margin:30px auto;
+		}
+		#canvas{
+			border:1px solid #d3d3d3;
+			background: #eee;
+			margin:10px auto;
+		}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.js"></script>
+	<script src="qrcode.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#ipt').change(function(){
+				var cur_pic = this.files[0];
+				preview_picture(cur_pic);
+			});
+
+			function preview_picture(pic){
+				var r = new FileReader();
+				r.readAsDataURL(pic);
+				r.onload = function(e){
+					$('#pic').attr("src",this.result).show()
+				}
+			}
+
+			var password = document.getElementById('password');
+			var picUrl = document.getElementById('pic_url');
+			 
+			(function() {
+				var qrcode = new QRCode('qrcode');
+				$('#qrcode').on('click', function() {
+					this.value = 'https://www.baidu.com/' + "?word=" + password.value + "&image=" + picUrl.value;
+					qrcode.makeCode(this.value);
+					// https://www.runoob.com/images/img_the_scream.jpg
+					//StZY0GFHySa
+				});
+			})();
+
+
+		})
+	</script>
+</head>
+<body>
+	<div class="box">
+		<div class="upload">
+			<div class="ipt-bg">
+				<div>请选择文件</div>
+				<input type="file" id="ipt" />
+			</div>
+			<img src="" id='pic'/>
+
+			<p>
+				请输入淘口令：
+				<input type="text"  value="" id="password"/>
+			</p>
+			<p>
+				请输入图片链接：
+				<input type="text" id="pic_url" id="qrcode_text" value=""/>
+			</p>
+			<div id="qrcode"></div>
+		</div>
+
+		<div class="produce">
+			<input type="button" id='btn' value="生成" onclick="imgCover()"/>
+			<canvas id="canvas" width="500" height="702" style="border:1px solid #d3d3d3;background: #eee;"></canvas>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		var qrcode = document.getElementById('qrcode');
+		function imgCover(){
+			var c = document.getElementById('canvas');
+			var ctx = c.getContext('2d');
+			var imga = document.getElementById("pic");
+			var imgb = qrcode.getElementsByTagName("img")[0];
+			var pwd = document.getElementById('password').value;
+			ctx.drawImage(imga,0,0,500,375);
+			ctx.drawImage(imgb,250,430,220,220);
+			ctx.font="14px Arial";
+			ctx.fillText('淘口令：',10,470);
+			ctx.fillText('￥'+pwd+'￥',10,500);
+		}
+	</script>
+</body>
+</html>

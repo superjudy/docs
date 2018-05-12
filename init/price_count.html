@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>price-count</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		li{
+			margin:10px 20px;
+			font-size: 18px;
+		}
+		input{
+			width: 30px;
+			height:30px;
+		}
+		em{
+			font-style: normal;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ul = document.getElementsByTagName('ul')[0];
+			var li = ul.getElementsByTagName('li');
+
+			for( var i = 0; i < li.length; i++){
+				priceCount( li[i] );
+			}
+
+			function priceCount(oli){
+				var btn = oli.getElementsByTagName('input');
+				var num = oli.getElementsByTagName('strong')[0];
+				var price = oli.getElementsByTagName('em')[0];
+				var count = oli.getElementsByTagName('span')[0];
+				var n = parseFloat(num.innerHTML);
+				btn[1].onclick = function(){
+					n ++;
+					num.innerHTML = n;
+					count.innerHTML = parseFloat(price.innerHTML) * n;
+				}
+				btn[0].onclick = function(){
+					n --;
+					if( n < 0 ){
+						n = 0;
+					}
+					num.innerHTML = n;
+					count.innerHTML = parseFloat(price.innerHTML) * n;
+				}
+				
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>11.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.8</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>5.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>8.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+	</ul>
+</body>
+</html>

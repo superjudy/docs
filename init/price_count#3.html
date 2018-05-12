@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>price-count</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		li{
+			margin:10px 20px;
+			font-size: 18px;
+		}
+		input{
+			width: 30px;
+			height:30px;
+		}
+		em{
+			font-style: normal;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ul = document.getElementsByTagName('ul')[0];
+			var li = ul.getElementsByTagName('li');
+			var p = document.getElementsByTagName('p')[0];
+			var $input = document.getElementsByTagName('input');
+			var span = p.getElementsByTagName('span');
+
+			var arrCountPrice = [];		//每个总价
+			var arrCount = [];			//每个数量
+			var arrPrice = [];			//每个单价
+			ul.addEventListener("click", function(e){
+			    var num = e.target.parentNode.children[1].innerHTML * 1;
+			    var price = e.target.parentNode.children[3].innerHTML * 1;
+			    if (e.target.value == '+') {
+			    	e.target.parentNode.children[1].innerHTML = ++num
+			    }else if(e.target.value == '-'){
+			    	num--;
+			    	if (num < 1) {
+			    		num = 1;
+			    	};
+			    	e.target.parentNode.children[1].innerHTML = num;
+			    }
+			    var sum = num * price;
+			    e.target.parentNode.children[4].innerHTML = sum;
+			    getResult();
+			});
+
+			function getResult(){
+				var sumCount = 0;
+				var sumPrice = 0;
+				var maxPrice = 0;
+				for (var i = 0; i < li.length; i++) {
+					sumPrice += li[i].children[4].innerHTML*1;
+					sumCount += li[i].children[1].innerHTML*1;
+					if (li[i].children[1].innerHTML > 0 && li[i].children[4].innerHTML> maxPrice) {
+						maxPrice = li[i].children[4].innerHTML;
+					}
+				}
+				span[0].innerHTML = sumCount;
+				span[1].innerHTML = sumPrice;
+				span[2].innerHTML = maxPrice;
+
+			}
+			
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>11.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.8</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>5.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>8.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+	</ul>
+	<p>
+		总共<span></span>件；<br/>
+		总价<span></span>元；<br/>
+		单价最贵的是<span></span>元
+	</p>
+</body>
+</html>

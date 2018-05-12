@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>price-count</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		li{
+			margin:10px 20px;
+			font-size: 18px;
+		}
+		input{
+			width: 30px;
+			height:30px;
+		}
+		em{
+			font-style: normal;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ul = document.getElementsByTagName('ul')[0];
+			var li = ul.getElementsByTagName('li');
+			var p = document.getElementsByTagName('p')[0];
+			var span = p.getElementsByTagName('span');
+
+			var arrCountPrice = [];		//每个总价
+			var arrCount = [];			//每个数量
+			var arrPrice = [];			//每个单价
+
+			for( var i = 0; i < li.length; i++){
+				priceCount( li[i],arrCountPrice,arrCount,arrPrice,i );
+			}
+
+			function priceCount(oli,arrCountPrice,arrCount,arrPrice,i){
+				var btn = oli.getElementsByTagName('input');
+				var num = oli.getElementsByTagName('strong')[0];
+				var price = oli.getElementsByTagName('em')[0];
+				var count = oli.getElementsByTagName('span')[0];
+				var n = Number( num.innerHTML );
+				var pTag = parseFloat(price.innerHTML);
+				btn[1].onclick = function(){
+					n ++;
+					num.innerHTML = arrCount[i] = n;
+					count.innerHTML = arrCountPrice[i] = n*pTag;
+					arrPrice[i] = pTag;
+					countPrices();
+					countNums();
+				}
+				btn[0].onclick = function(){
+					n --;
+					if( n < 0 ){
+						n = 0;
+					}
+					num.innerHTML = arrCount[i] = n;
+					count.innerHTML = arrCountPrice[i] = n*pTag;
+					arrPrice[i] = pTag;
+					countPrices();
+					countNums();
+				}
+			}
+
+			//计算总件数
+			function countNums(){
+				var nums = 0;
+				var maxValue = 0;
+				for(var m = 0; m < arrCount.length; m++){
+					if( typeof arrCount[m] =='undefined' ){
+						arrCount[m] = 0;
+					}
+					nums += arrCount[m];
+					if( arrCount[m] > 0 && arrPrice[m] > maxValue ){
+						maxValue = arrPrice[m];
+					}
+				}
+				span[0].innerHTML = nums;
+				span[2].innerHTML = maxValue;
+				console.log(nums)
+			}
+
+			//计算总价钱
+			function countPrices(){
+				var cNumber = 0;
+				for(var p = 0; p < arrCountPrice.length; p++){
+					if( typeof arrCountPrice[p] =='undefined' ){
+						arrCountPrice[p] = 0;
+					}
+					cNumber += arrCountPrice[p];
+				}
+				span[1].innerHTML = cNumber;
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>11.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>12.8</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>5.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+		<li>
+			<input type="button" value="-"/>
+			<strong>0</strong>
+			<input type="button" value="+"/>
+			单价 <em>8.5</em> 元
+			共计 <span>0</span> 元
+		</li>
+	</ul>
+	<p>
+		总共<span></span>件；<br/>
+		总价<span></span>元；<br/>
+		单价最贵的是<span></span>元
+	</p>
+</body>
+</html>
