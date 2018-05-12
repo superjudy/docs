@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pic-tab-param</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		.box{
+			width: 550px;
+			height:360px;
+			border:1px solid #ccc;
+			margin:100px auto;
+		}
+		#list{
+			float: left;
+			width: 150px;
+			text-align: center;
+			height: 360px;
+
+		}
+		#list>li{
+			line-height: 59px;
+			height:59px;
+			border-bottom:1px solid #ccc;
+			cursor: pointer;
+		}
+		#list>li.active,
+		.list-in>li.liActice{
+			background: #ccc;
+		}
+		#list>li:last-child,
+		.list-in>li:last-child{
+			border: none;
+		}
+		.list-in{
+			overflow: hidden;
+		}
+		.list-in>li{
+			float: left;
+			height:60px;
+			line-height: 60px;
+			min-width: 65px;
+			text-align: center;
+			border-right:1px solid #ccc;
+		}
+		img{
+			width: 400px;
+			display: block;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var list = document.getElementById('list');
+			var lis = list.getElementsByTagName('li');
+			var box = document.getElementById('box');
+			var boxs = box.getElementsByTagName('div');
+
+			var arrUrl = [
+				['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg'],
+				['img2/3.jpg','img2/4.jpg','img2/5.jpg'],
+				['img2/1.jpg','img2/4.jpg','img2/5.jpg'],
+				['img2/1.jpg','img2/2.jpg','img2/4.jpg','img2/5.jpg'],
+				['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/5.jpg'],
+				['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg','img2/4.jpg']
+			]
+			
+			for(var i = 0; i < lis.length; i++){
+				lis[i].index = i;
+				lis[i].onclick = function(){
+					for(var i = 0; i < boxs.length; i++){
+						boxs[i].style.display = "none";
+						this.className = 'active';
+					}
+					for(var i = 0; i < lis.length; i++){
+						lis[i].className = '';
+					}
+					this.className = 'active';
+					boxs[this.index].style.display = "block";
+				}
+			}
+
+			var uls = boxs[0].getElementsByTagName('ul');
+
+			function picTab(box,num){
+				var img = box.getElementsByTagName('img')[0];
+				var li = box.getElementsByTagName('li');
+				for(var i = 0; i < li.length; i++){
+					li[i].index = i;
+					li[i].onclick = function(){
+						img.src = arrUrl[num][this.index];
+						for(var i = 0; i < li.length; i++){
+							li[i].className = '';
+						}
+						li[this.index].className = 'liActice';
+					}
+				}
+			}
+
+			for(var j = 0; j < boxs.length; j++){
+				picTab(boxs[j],j);
+			}
+			
+		}
+	</script>
+</head>
+<body>
+<div class="box">
+	<ul id="list">
+		<li class="active">大标签1</li>
+		<li>大标签2</li>
+		<li>大标签3</li>
+		<li>大标签4</li>
+		<li>大标签5</li>
+		<li>大标签6</li>
+	</ul>
+	<div id="box">
+		<div>
+			<img src="img2/1.jpg"/>
+			<ul class="list-in" id="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+				<li>小标签4</li>
+				<li>小标签5</li>
+			</ul>
+		</div>
+		<div style="display:none;">
+			<img src="img2/2.jpg"/>
+			<ul class="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+			</ul>
+		</div>
+		<div style="display:none;">
+			<img src="img2/3.jpg"/>
+			<ul class="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+			</ul>
+		</div>
+		<div style="display:none;">
+			<img src="img2/4.jpg"/>
+			<ul class="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+				<li>小标签4</li>
+			</ul>
+		</div>
+		<div style="display:none;">
+			<img src="img2/5.jpg"/>
+			<ul class="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+				<li>小标签4</li>
+			</ul>
+		</div>
+		<div style="display:none;">
+			<img src="img/1.jpg"/>
+			<ul class="list-in">
+				<li class="liActice">小标签1</li>
+				<li>小标签2</li>
+				<li>小标签3</li>
+				<li>小标签4</li>
+				<li>小标签5</li>
+				<li>小标签6</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>
