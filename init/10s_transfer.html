@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>second-to-minute</title>
+	<style type="text/css">
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var p = document.getElementsByTagName('p');
+			var s = 3245774;
+			var p2 = 10;
+			p[0].innerHTML = Math.floor(s/60) + '+' + s%60;
+
+			var timer = setInterval(function(){
+				p2--;
+				p[1].innerHTML = p2;
+				if( p2 < 1 ){
+					window.location.href = 'https://www.baidu.com/'
+				}
+			},1000);
+			
+		}
+	</script>
+</head>
+<body>
+	<p></p>
+	<hr/>
+	页面错误，<p>10</p>秒后即将跳转至<a href="https://www.baidu.com/">百度</a>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>pic_tab_param</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+			font-size: 14px;
+			line-height: 30px;
+		}
+		.box{
+			width: 300px;
+			height:500px;
+			border:1px solid #ccc;
+			margin:50px auto;
+		}
+		.box-up{
+			width: 290px;
+			height:30px;
+			margin:5px;
+		}
+		a{
+			width: 60px;
+			text-decoration: none;
+			display: inline-block;
+			text-align: center;
+			background: #eee;
+			color:#333;
+		}
+		a:hover{
+			background: #ccc;
+		}
+		.box-bottom{
+			background: #eee;
+			margin:5px;
+		}
+		.box-bottom li{
+			padding-left: 5px;
+			border-bottom:1px solid #e6e6e6;
+		}
+		.box-bottom li div{
+			width: 270px;
+			overflow: hidden;
+			background: #ddd;
+			margin:0 5px 5px 0;
+			padding:5px;
+		}
+		.box-bottom li div span{
+			float: left;
+			color:#999;
+			line-height: 18px;
+			font-size: 10px;
+			width: 210px;
+		}
+		.box-bottom li div button{
+			float: right;
+			width: 50px;
+			height:22px;
+			line-height: 22px;
+			font-size: 12px;
+			background: none;
+			border:1px solid #999;
+			border-radius: 4px;
+			outline: none;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var tabs = document.getElementById('tab-icon');
+			var icons = tabs.getElementsByTagName('a');
+			var con = document.getElementById('tab-cont');
+			var divs = con.getElementsByTagName('ul');
+
+			for(var i = 0; i < icons.length; i++){
+				icons[i].index = i;
+				icons[i].onclick = function(){
+					for(var i = 0; i < icons.length; i++){
+						icons[i].className = '';
+						divs[i].style.display = "none";
+					}
+					this.className = 'cur';
+					divs[this.index].style.display = "block";
+				}
+			}
+
+			function lisTab(div){
+				var lis = div.getElementsByTagName('li');
+				for(var i = 0; i < lis.length; i++){
+					lis[i].index = i;
+					lis[i].onclick = function(){
+						for(var i = 0; i < lis.length; i++){
+							lis[i].children[1].style.display = 'none';
+						}
+						lis[this.index].children[1].style.display = 'block';
+					}
+				}
+			}
+
+			for(var i = 0; i < divs.length; i++){
+				lisTab(divs[i]);			
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="box">
+	<div class="box-up" id='tab-icon'>
+		<a href="javascript:;" class="cur">人物</a>
+		<a href="javascript:;">历史</a>
+		<a href="javascript:;">艺术</a>
+	</div>
+	<div class="box-bottom" id='tab-cont'>
+		<div>
+			<ul style="display: block;">
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<ul style="display: none;">
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div>
+			<ul style="display: none;">
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+				<li>
+					<p>我是一条小新闻，小新闻，啦啦啦~~~</p>
+					<div style="display: none;">
+						<span>我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦,我是一条小新闻，小新闻，啦啦啦~~~</span>
+						<button>详情</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>check</title>
+	<style type="text/css">
+		*{
+			list-style: none;
+		}
+		button{
+			width: 60px;
+			height: 30px;
+			margin:5px;
+		}
+		input{
+			margin:5px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btns = document.getElementsByTagName('button');
+			var ipt = document.getElementsByTagName('input');
+
+			btns[0].onclick = function(){
+				for(var i =0 ; i < ipt.length; i++){
+					ipt[i].checked = true;
+				}
+			}
+
+			btns[1].onclick = function(){
+				for(var i =0 ; i < ipt.length; i++){
+					// if( ipt[i].checked ){
+					// 	ipt[i].checked = false;
+					// }else{
+					// 	ipt[i].checked = true;
+					// }
+					ipt[i].checked = !ipt[i].checked;
+				}
+			}
+
+			btns[2].onclick = function(){
+				for(var i =0 ; i < ipt.length; i++){
+					ipt[i].checked = false;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<button>全选</button>
+	<button>反选</button>
+	<button>不选</button>
+	<br/>
+	<input type="checkbox"/>选择项1<br/>
+	<input type="checkbox"/>选择项2<br/>
+	<input type="checkbox"/>选择项3<br/>
+	<input type="checkbox"/>选择项4<br/>
+	<input type="checkbox"/>选择项5<br/>
+	<input type="checkbox"/>选择项6<br/>
+	<input type="checkbox"/>选择项7<br/>
+	<input type="checkbox"/>选择项8<br/>
+	<input type="checkbox"/>选择项9<br/>
+	<input type="checkbox"/>选择项10<br/>
+</body>
+</html>
