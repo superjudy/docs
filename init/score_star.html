@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>score-star</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		p{
+			width: 400px;
+			margin:50px auto;
+		}
+		a{
+			width: 20px;
+			height:20px;
+			display: inline-block;
+			text-decoration: none;
+			color:#ccc;
+			font-size: 20px;
+			border:1px solid #ccc;
+		}
+		span{
+			display: none;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var as = document.getElementsByTagName('a');
+			var span = document.getElementsByTagName('span')[0];
+			var num = -1;
+
+			for(var i = 0; i < as.length; i++){
+				as[i].index = i;
+				as[i].onmouseover = function(){
+					var str = '';
+					var color = '';
+
+					switch( this.index ){
+						case 0:
+							str = '极差';
+							color = 'rgba(255,0,0,.2)';
+							break;
+						case 1:
+							str = '较差';
+							color = 'rgba(255,0,0,.4)';
+							break;
+						case 2:
+							str = '一般';
+							color = 'rgba(255,0,0,.6)';
+							break;
+						case 3:
+							str = '推荐';
+							color = 'rgba(255,0,0,.8)';
+							break;
+						case 4:
+							str = '优秀';
+							color = 'rgba(255,0,0,1)';
+							break;
+					}
+
+					for( var i = 0; i <= this.index; i++ ){
+						as[i].innerHTML = '★';
+						as[i].style.color = color;
+					}
+					span.style.display = 'inline-block';
+					span.innerHTML = str;
+				}
+
+				as[i].onmouseout = function(){
+					for( var i = 0; i <= this.index; i++ ){
+						if( i <= num ){
+							as[i].innerHTML = '★';
+						}else{
+							as[i].innerHTML = '☆';
+							as[i].style.color = '#ccc';
+						}
+					}
+				}
+
+				as[i].onclick = function(){
+					num = this.index;
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+	<p>
+		总体评分:
+		<a href="javasctipt:;">☆</a>
+		<a href="javasctipt:;">☆</a>
+		<a href="javasctipt:;">☆</a>
+		<a href="javasctipt:;">☆</a>
+		<a href="javasctipt:;">☆</a>
+		<span>11</span>
+	</p>
+</body>
+</html>

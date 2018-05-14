@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>return#1</title>
+	<script type="text/javascript">
+	window.onload = function(){
+		alert(fun(8,4));
+		alert(fun(3,7))
+		function fun(n,m){
+			var arr = [];
+			var arrS = [];
+			var a;
+			for(var i = 0; i < 10; i++){
+				arr.push(i);
+				if( n > m ){
+					a = m;
+					m = n;
+					n = a;
+				}
+				arrS = arr.slice(n,m);
+			}
+			return arrS;
+		}
+	}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
