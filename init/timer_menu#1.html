@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>timer-menu</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+			text-align: center;
+			line-height: 30px;
+		}
+		#ul{
+			margin:10px;
+			overflow: hidden;
+		}
+		#ul li{
+			float: left;
+			width: 100px;
+			height:30px;
+			border:1px solid #ccc;
+		}
+		div{
+			width: 500px;
+			overflow: hidden;
+		}
+		div>ul{
+			width: 100px;
+			border:1px solid #ccc;
+		}
+		div>ul:nth-child(1){
+			margin-left:10px;
+		}
+		div>ul:nth-child(2){
+			margin-left:110px;
+		}
+		div>ul:nth-child(3){
+			margin-left:210px;
+		}
+		div>ul:nth-child(4){
+			margin-left:310px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ul = document.getElementById('ul');
+			var lis = ul.getElementsByTagName('li');
+			var div = document.getElementsByTagName('div')[0];
+			var aul = div.getElementsByTagName('ul');
+			var timer = null;
+
+			for(var i = 0; i < lis.length; i++){
+				lis[i].index = i;
+
+				lis[i].onmouseover = show;
+				lis[i].onmouseout = hide;
+
+				aul[i].onmouseover =show;
+
+				function show(){
+					for(var i = 0; i < aul.length; i++){
+						clearTimeout(timer);
+						aul[this.index].style.display = "block";
+					}
+				}
+
+				function hide(){
+					timer = setTimeout(function(){
+						for(var i = 0; i < lis.length; i++){
+							aul[i].style.display = "none";
+						}
+					},300)
+				}
+
+				aul[i].onmouseover = function(){
+					aul[this.index].style.display = "none";
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<ul id="ul">
+	<li>导航1</li>
+	<li>导航2</li>
+	<li>导航3</li>
+	<li>导航4</li>
+</ul>
+<div>
+	<ul style="display: none;">
+		<li>1副标题1</li>
+		<li>1副标题2</li>
+		<li>1副标题3</li>
+	</ul>
+	<ul style="display: none;">
+		<li>2副标题1</li>
+		<li>2副标题2</li>
+	</ul>
+	<ul style="display: none;">
+		<li>3副标题1</li>
+		<li>3副标题2</li>
+		<li>3副标题4</li>
+	</ul>
+	<ul style="display: none;">
+		<li>4副标题1</li>
+		<li>4副标题2</li>
+		<li>4副标题3</li>
+		<li>4副标题4</li>
+	</ul>
+</div>
+</body>
+</html>

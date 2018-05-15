@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>timer-menu#3</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		div{
+			width: 500px;
+			margin:30px auto;
+			border:1px solid #ccc;
+			overflow: hidden;
+		}
+		ul{
+			width: 100px;
+			float: left;
+		}
+		li{
+			height: 24px;
+			line-height: 24px;
+			text-align: center;
+			font-size: 14px;
+			border-bottom: 1px solid #ccc;
+		}
+		li:last-child{
+			border:none;
+		}
+		img{
+			width: 300px;
+			float: left;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var div = document.getElementsByTagName('div')
+
+			for(var i = 0; i < div.length; i++){
+				divTab(div[i]);
+			}
+
+			function divTab(div){
+				var arrUrl = ['img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg','img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg','img2/1.jpg','img2/2.jpg','img2/3.jpg','img2/4.jpg','img2/5.jpg','img2/1.jpg','img2/2.jpg','img2/3.jpg'];
+				var li = div.getElementsByTagName('li');
+				var img = div.getElementsByTagName('img')[0];
+				var timer = null;
+				var speed  = 1000;
+				var num  = 0;
+
+				timer = setInterval(function(){
+					num ++;
+					if( num == li.length){
+						num = 0;
+					}
+					for(var i = 0; i < li.length; i++){
+						li[i].style.color = "#333";
+					}
+					li[num].style.color = "red";
+					img.src = arrUrl[num];
+				},speed);				
+			}
+
+
+		}
+	</script>
+</head>
+<body>
+<div>
+	<ul>
+		<li>1标签1</li>
+		<li>1标签2</li>
+		<li>1标签3</li>
+		<li>1标签4</li>
+		<li>1标签5</li>
+		<li>1标签6</li>
+		<li>1标签7</li>
+		<li>1标签8</li>
+		<li>1标签9</li>
+	</ul>
+	<img src="img2/1.jpg" />
+	<ul>
+		<li>2标签1</li>
+		<li>2标签2</li>
+		<li>2标签3</li>
+		<li>2标签4</li>
+		<li>2标签5</li>
+		<li>2标签6</li>
+		<li>2标签7</li>
+		<li>2标签8</li>
+		<li>2标签9</li>
+	</ul>
+</div>
+
+<div>
+	<ul>
+		<li>1标签1</li>
+		<li>1标签2</li>
+		<li>1标签3</li>
+		<li>1标签4</li>
+		<li>1标签5</li>
+		<li>1标签6</li>
+		<li>1标签7</li>
+		<li>1标签8</li>
+		<li>1标签9</li>
+	</ul>
+	<img src="img2/1.jpg" />
+	<ul>
+		<li>2标签1</li>
+		<li>2标签2</li>
+		<li>2标签3</li>
+		<li>2标签4</li>
+		<li>2标签5</li>
+		<li>2标签6</li>
+		<li>2标签7</li>
+		<li>2标签8</li>
+		<li>2标签9</li>
+	</ul>
+</div>
+</body>
+</html>

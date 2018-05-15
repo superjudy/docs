@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>timer-menu2</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		.box{
+			width: 300px;
+			margin: 100px auto;
+			border:1px solid #ccc;
+		}
+		.part{
+			overflow: hidden;
+		}
+		.part img{
+			width: 100px;
+			display: block;
+			float: left;
+		}
+		.part div{
+			float: left;
+			margin-left: 10px;
+		}
+		p{
+			height:30px;
+			line-height: 30px;
+		}
+		a{
+			text-decoration: none;
+			color:#333;
+			padding:0 15px;
+			border:1px solid #ccc;
+			height:30px;
+			line-height: 30px;
+		}
+		li{
+			border:1px solid #ccc;
+			margin:3px 0;
+			padding:0 5px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var li = document.getElementsByTagName('li');
+			var timer = null;
+			var timer2 = null;
+			var num = 0;
+			var num2 = 0;
+			var speed = 1000;
+
+			var ul = document.getElementsByTagName('ul');
+			var a = document.getElementsByTagName('a');
+			var img = document.getElementsByTagName('img')[0];
+			var arrUrl = ['img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg','img/1.jpg','img/2.jpg','img/3.jpg','img/4.jpg','img/5.jpg','img/1.jpg','img/2.jpg'];
+
+			timer2 = setInterval(function(){
+				num2 ++;
+				if( num2 == a.length){
+					num2 = 0;
+				}
+				for(var i = 0; i < a.length; i++){
+					ul[i].style.display = 'none';
+					a[i].style.color = '#333';
+				}
+				ul[num2].style.display = 'block';
+				a[num2].style.color = 'red';
+			},li.length / a.length * speed)
+
+
+			timer = setInterval(function(){
+				num ++;	
+				if( num == li.length){
+					num = 0;
+				}
+				for(var i = 0; i < li.length; i++){
+					li[i].style.color = '#333';
+				}
+				li[num].style.color = 'red';
+				img.src = arrUrl[num];
+			},speed)
+		}
+	</script>
+</head>
+<body>
+<div class="box">
+	<p>
+		<a href="javascript:;">标题1</a>
+		<a href="javascript:;">标题2</a>
+	</p>
+	<div class="part">
+		<img src="img/1.jpg"/>
+		<div>
+			<ul>
+				<li>1小新闻小新闻</li>
+				<li>2小新闻小新闻</li>
+				<li>3小新闻小新闻</li>
+				<li>4小新闻小新闻</li>
+				<li>5小新闻小新闻</li>
+				<li>6小新闻小新闻</li>
+			</ul>
+			<ul style="display: none;">
+				<li>4小新闻小新闻</li>
+				<li>5小新闻小新闻</li>
+				<li>6小新闻小新闻</li>
+				<li>7小新闻小新闻</li>
+				<li>8小新闻小新闻</li>
+				<li>9小新闻小新闻</li>
+			</ul>
+		</div>
+	</div>
+
+</div>
+</body>
+</html>
