@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>dou-fn</title>
+	<style type="text/css">
+		img{
+			position: absolute;
+			left:200px;
+			top:200px;
+		}
+	</style>
+	<script type="text/javascript" src="jutils.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var img = document.getElementsByTagName('img')[0];
+
+			img.onclick = function(){
+				shake(img,'left');
+			}
+		}
+	</script>
+</head>
+<body>
+<img src="img2/1.jpg"/>
+</body>
+</html>

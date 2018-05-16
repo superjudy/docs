@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>timer-do-move</title>
+	<style type="text/css">
+		div{
+			width: 100px;
+			height: 100px;
+			background: red;
+			margin-top: 10px;
+			position: absolute;
+			left:10px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btn = document.getElementsByTagName('button');
+			var div = document.getElementsByTagName('div')[0];
+
+			var timer = null;
+			var speed = 0;
+
+			function getStyle(obj,attr){
+				return obj.currentStyle ? obj.currentStyle[attr] : getComputedStyle(obj)[attr];
+			}
+
+			function doMove(div,dir,maxVal){
+				clearInterval(timer);
+				timer = setInterval(function(){
+					speed = parseInt(getStyle(div,'left')) + dir;
+					if( speed > maxVal && dir > 0 ){
+						speed = maxVal;
+					}
+					if( speed < maxVal && dir < 0 ){
+						speed = maxVal;
+					}
+					div.style.left = speed + 'px';
+				},30);
+			}
+
+			btn[1].onclick = function(){
+				doMove(div,10,800)
+			}
+			btn[0].onclick = function(){
+				doMove(div,-10,10)
+			}
+		}
+	</script>
+</head>
+<body>
+	<button>往后</button>
+	<button>往前</button>
+	<div></div>
+</body>
+</html>
