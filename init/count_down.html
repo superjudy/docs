@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>count-down</title>
+	<style type="text/css">
+		body{
+			line-height: 30px;
+		}
+		input{
+			width:300px;
+			height:30px;
+			margin:10px 0;
+			padding:0 5px;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ipt = document.getElementsByTagName('input');
+			var timer = null;
+			ipt[2].onclick = function(){
+				clearInterval(  timer );
+				var oldTime = new Date( ipt[0].value );
+				timer = setInterval(function(){
+					var myTime = new Date();
+					var t = Math.floor( ( oldTime - myTime ) / 1000 );
+					var str = '';
+					str = Math.floor(t/86400) + "天" + Math.floor(t%86400/3600) + "时" + Math.floor(t%86400%3600/60) + "分" + t%60 + '秒';
+					if( t < 1 ){
+						clearInterval(timer);
+					}
+					ipt[1].value = str;
+				},1000);
+			}
+		}
+	</script>
+</head>
+<body>
+	距离：<input type="text" value="May 19,2018 15:13:55"/><br/>
+	还有：<input type="text"/><br/>
+	<input type="button" value="开始倒计时"/>
+</body>
+</html>

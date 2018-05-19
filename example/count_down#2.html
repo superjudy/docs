@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>count-down</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding:0;
+			list-style: none;
+		}
+		.warp-limit{
+			width: 1045px;
+			margin:20px auto;
+		}
+		h2{
+			font-size:22px;
+			line-height: 40px;
+			color:#333;
+			padding:5px 0;
+			border-bottom: 3px solid #ccc;
+		}
+		.limit-area{
+			width: 1045px;
+			height: 332px;
+			margin:10px auto;
+		}
+		.limit-area li{
+			width: 260px;
+			height: 330px;
+			border:1px solid #ccc;
+			float: left;
+			border-right:none;
+			position: relative;
+		}
+		.limit-area li .pic{
+			width: 258px;
+			height:329px;
+			position: absolute;
+			left:1px;
+			top:1px;
+		}
+		.limit-area li .pro-area{
+			width: 260px;
+			height: 329px;
+			background: #fff;
+			position: absolute;
+			top:1px;
+			left:0;
+			z-index: 9;
+			margin:0 auto;
+			overflow: hidden;
+		}
+		.limit-area li:last-child{
+			border:1px solid #ccc;
+		}
+		.limit-area li div{
+			width: 240px;
+			margin:10px auto 5px;
+		}
+		.limit-area li div input{
+			width: 172px;
+			height:26px;
+			line-height: 26px;
+			border:1px solid #ccc;
+			border-radius: 6px;
+			outline: none;
+			padding-left: 8px;
+		}
+		.limit-area li div button{
+			width: 50px;
+			height: 26px;
+			line-height: 26px;
+			outline: none;
+			border:1px solid #ccc;
+			border-radius: 6px;
+			background: #ccc;
+			cursor: pointer;
+		}
+		.limit-time{
+			margin:5px auto ;
+			line-height: 30px;
+			font-size:14px;
+			text-align: center;
+		}
+		.limit-area li .pro-img{
+			width: 200px;
+			display: block;
+			margin:5px auto;
+		}
+		.pro-info{
+			width: 238px;
+			margin: 5px auto;
+			font-size: 12px;
+			line-height: 20px;
+			color:#999;
+		}
+		.pro-price{
+			width: 238px;
+			margin:5px auto;
+			font-size: 14px;
+			line-height: 30px;
+		}
+		.warp-product{
+			width: 1045px;
+			margin:20px auto;
+		}
+		.product-area{
+			width: 1045px;
+		}
+		.product-area li{
+			width: 1045px;
+			height:75px;
+			padding:8px 0;
+			background: #ccc;
+			overflow: hidden;
+			margin:2px auto;
+		}
+		.product-area li div{
+			float: left;
+			padding:22px 10px;
+			line-height: 30px;
+			text-align: center;
+			border-right:1px solid #fff;
+			box-sizing: border-box;
+		}
+		.product-area li div.pro-intro2{
+			width: 50%;
+			overflow: hidden;
+			text-overflow:ellipsis;
+			white-space: nowrap;
+		}
+		.product-area li div.pro-price2{
+			width: 20%;
+		}
+		.product-area li div.pro-img2{
+			width: 30%;
+		}
+		.product-area li img{
+			width: 100px;
+			display: block;
+			margin: 0 auto;
+		}
+		.color{
+			color:#999;
+		}
+		.warp-product p{
+			line-height: 40px;
+			font-size:18px;
+			margin:10px auto;
+			font-weight: bold;
+		}
+	</style>
+	<script type="text/javascript" src="jutils.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ulLimt = document.getElementById('limit-area');
+			var lis = ulLimt.getElementsByTagName('li');
+			var ulProduct = document.getElementById('product-area');
+			var liPro = ulProduct.getElementsByTagName('li');
+			var countPrice = document.getElementById('countPrice');
+			var arr = [];    //计算售罄商品的总价；
+
+			//倒计时部分
+			function countDown(obj,i){
+				var div = obj.getElementsByTagName('div')[0];
+				var ipt = div.getElementsByTagName('input')[0];
+				var btn = div.getElementsByTagName('button')[0];
+				var img =  div.getElementsByTagName('img')[0];
+				var p1 =  div.getElementsByTagName('p');
+				var sp = p1[0].getElementsByTagName('span')[0];
+				var sp2 = p1[2].getElementsByTagName('span')[0];
+				var price = Number(sp2.innerHTML);
+				var timer = null;
+				var ulStr = '';
+				btn.onclick = function(){
+					clearInterval( timer );
+					var oldTime = new Date( ipt.value );
+					timer = setInterval(function(){
+						var myTime = new Date();
+						var t = Math.floor( ( oldTime - myTime ) / 1000 );
+						if( t < 1 ){
+							clearInterval( timer );
+							doMoveToOpcity(div,23,500,'top');
+							ulProduct.innerHTML += '<li><div class="pro-intro2 color">' + p1[1].innerHTML + '</div><div class="pro-price2 color">' + price + '</div><img src="' + img.src + '"/></li>';
+							countPrices();
+						}
+						var str = '';
+						str = toMaxTen( Math.floor(t/86400) ) + " 天 " + toMaxTen( Math.floor(t%86400/3600) ) + " 时 " + toMaxTen( Math.floor(t%86400%3600/60) ) + " 分 " + toMaxTen( t%60 ) + ' 秒 ';
+						sp.innerHTML = str;	
+					},1000);
+				}
+			}
+
+			for( var i = 0; i < lis.length; i++){
+				countDown(lis[i]);
+			}
+			
+			//时间小于数字小于10，前面补一个0
+			function toMaxTen(n){
+				if( n < 10 ){
+					return '0' + n;
+				}else{
+					 return '' + n;
+				}
+			}
+
+			//计算售罄商品总价
+			function countPrices(){
+				var cNumber = 0;
+				for(var i = 0; i < liPro.length; i++){
+					cNumber += Number( liPro[i].children[1].innerHTML );
+				}
+				countPrice.innerHTML = cNumber;
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="warp-limit">
+	<h2>限购时间</h2>
+	<ul id="limit-area" class="limit-area">
+		<li>
+			<img src="img2/sellout.jpg" class="pic" />
+			<div class="pro-area">
+				<div>
+					<input type="text" value="May 20,2018 01:10:00"/>
+					<button>确定</button>
+				</div>
+				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
+				<img src="img2/1.jpg" class="pro-img" />
+				<p class="pro-info">111迷你熊掌马卡龙暖手宝暖宝宝随身小usb充电宝学生两用石可爱便携</p>
+				<p class="pro-price">抢购价：￥<span>599.00</span></p>
+			</div>
+		</li>
+		<li>
+			<img src="img2/sellout.jpg" class="pic" />
+			<div class="pro-area">
+				<div>
+					<input type="text" value="May 20,2018 01:10:00"/>
+					<button>确定</button>
+				</div>
+				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
+				<img src="img2/2.jpg" class="pro-img" />
+				<p class="pro-info">222迷你熊掌马卡龙暖手宝暖宝宝随身小usb充电宝学生两用石可爱便携</p>
+				<p class="pro-price">抢购价：￥<span>59.00</span></p>
+			</div>
+		</li>
+		<li>
+			<img src="img2/sellout.jpg" class="pic" />
+			<div class="pro-area">
+				<div>
+					<input type="text" value="May 20,2018 01:10:00"/>
+					<button>确定</button>
+				</div>
+				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
+				<img src="img2/3.jpg" class="pro-img" />
+				<p class="pro-info">333迷你熊掌马卡龙暖手宝暖宝宝随身小usb充电宝学生两用石可爱便携</p>
+				<p class="pro-price">抢购价：￥<span>199.00</span></p>
+			</div>
+		</li>
+		<li>
+			<img src="img2/sellout.jpg" class="pic" />
+			<div class="pro-area">
+				<div>
+					<input type="text" value="May 20,2018 01:10:00"/>
+					<button>确定</button>
+				</div>
+				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
+				<img src="img2/4.jpg" class="pro-img" />
+				<p class="pro-info">444迷你熊掌马卡龙暖手宝暖宝宝随身小usb充电宝学生两用石可爱便携</p>
+				<p class="pro-price">抢购价：￥<span>99.00</span></p>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class="warp-product">
+	<ul class="product-area">
+		<li>
+			<div class="pro-intro2">商品名称</div>
+			<div class="pro-price2">价格</div>
+			<div class="pro-img2">商品图片</div>
+		</li>
+	</ul>
+	<ul id="product-area" class="product-area">
+	</ul>
+	<p>总价：￥<span id="countPrice">0</span>元</p>
+</div>
+</body>
+</html>
