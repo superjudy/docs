@@ -49,7 +49,7 @@ function shake(obj,attr,fn){
 	var arr = [];
 	var timer = null;
 	var pos = parseInt(getStyle(obj,attr));
-	for(var i = 20; i > 0; i -= 2){
+	for(var i = 20; i > 0; i -= 4){
 		arr.push(i,-i);
 	}
 	arr.push(0);

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>str-detect-num</title>
+	<style type="text/css">
+		input{
+			width: 300px;
+			height:30px;
+			margin:10px;
+			padding:0 0 0 6px;
+		}
+		button{
+			width: 60px;
+			height:34px;
+		}
+	</style>
+	<script type="text/javascript" src="jutils.js"></script>
+	<script type="text/javascript">
+		window.onload = function(){
+			var ipt = document.getElementsByTagName('input')[0];
+			var btn = document.getElementsByTagName('button')[0];
+
+			btn.onclick = function(){
+				if( detectNum(ipt.value) ){
+					alert('输入的是数字');
+				}else{
+					alert('输入的不是数字');
+				}
+			}
+		}
+	</script>
+</head>
+<body>
+<input type="text"/>
+<button>确定</button>
+</body>
+</html>

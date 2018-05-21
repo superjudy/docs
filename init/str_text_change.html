@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>str-text-change</title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		.box{
+			width: 500px;
+			margin:30px auto;
+			padding:10px;
+			border:5px solid #ccc;
+			position: relative;
+		}
+		#btn1{
+			width: 60px;
+			height:30px;
+			line-height: 30px;
+			background: pink;
+			position: absolute;
+			right:-65px;
+			top:-5px;
+			border: none;
+			outline: none;
+			cursor: pointer;
+		}
+		.box span{
+			width: 60px;
+			height:60px;
+			line-height: 30px;
+			position: absolute;
+			right:-65px;
+			top:25px;
+			display: none;
+		}
+		.box span a{
+			width: 60px;
+			height:30px;
+			text-align: center;
+			display: block;
+			text-decoration: none;
+			color:#333;
+			background: #ddd;
+			font-size: 14px;
+		}
+		.box1{
+			width: 500px;
+			margin:10px auto;
+			border:5px solid #ccc;
+			padding:10px;
+			display: none;
+			position: relative;
+		}
+		.btns a{
+			width: 60px;
+			height: 30px;
+			line-height: 30px;
+			background: #ddd;
+			text-align: center;
+			display: inline-block;
+			text-decoration: none;
+			color:#333;
+		}
+		.btns a.active{
+			background: #ccc;
+		}
+		.ipts{
+			width: 500px;
+			margin:10px auto;
+		}
+		.ipts input{
+			width: 200px;
+			height: 26px;
+			line-height: 26px;
+			outline: none;
+			border:1px solid #ccc;
+			padding-left:6px;
+		}
+		.ipts button{
+			width: 60px;
+			height: 26px;
+			line-height: 26px;
+		}
+		i{
+			width: 30px;
+			height:30px;
+			display: block;
+			text-align: center;
+			line-height: 30px;
+			font-size: 20px;
+			position: absolute;
+			right: 10px;
+			top:10px;
+			font-style: normal;
+			cursor: pointer;
+		}
+		em{
+			font-style: normal;
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+			var btnOpen = document.getElementById('btn1');
+			var span = document.getElementsByTagName('span')[0];
+			var p = document.getElementsByTagName('p')[0];
+			var close = document.getElementsByTagName('i')[0];
+			var as = span.getElementsByTagName('a');
+			var box = document.getElementById('box1');
+			var tabAs = box.getElementsByTagName('a');
+			var iptBox = document.getElementById('ipts');
+			var divs = iptBox.getElementsByTagName('div');
+			var ipt = iptBox.getElementsByTagName('input');
+			var btn = iptBox.getElementsByTagName('button');
+			var onOff = true;
+			var str = '';
+
+			btnOpen.onclick = function(){
+				if( onOff ){
+					span.style.display = "block";
+					this.innerHTML = '收缩';	
+				}else{
+					span.style.display = "none";
+					this.innerHTML = '展开';	
+				}
+				onOff = !onOff;
+			}
+
+			function tab(a){
+				for( var i = 0; i < a.length; i++ ){
+					a[i].index = i;
+					a[i].onclick = function(){
+						box.style.display = 'block';
+						for( var i = 0; i < divs.length; i++ ){
+							divs[i].style.display = 'none';
+						}
+						divs[this.index].style.display = 'block';
+					}
+				}
+			}
+
+			tab(as);
+			tab(tabAs);
+
+			btn[0].onclick = function(){
+				var arr = p.innerHTML.split(ipt[0].value);
+				p.innerHTML = arr.join( '<em>'+ ipt[0].value +'</em>' );
+			}
+
+			btn[1].onclick = function(){
+				var arr = p.innerHTML.split(ipt[1].value);
+				p.innerHTML = arr.join( '<em>'+ ipt[2].value +'</em>' );
+			}
+
+			close.onclick = function(){
+				box.style.display = 'none';
+			}
+		}
+	</script>
+</head>
+<body>
+<div class="box">
+	<p>“天地英雄气，千秋尚凛然。”无数英雄先烈是我们民族的脊梁，是我们不断开拓前进的勇气和力量所在。新华社《学习进行时》梳理了习近平总书记关于崇尚英雄、缅怀先烈的十句经典论述，与您分享，一同铭记。“天地英雄气，千秋尚凛然。”无数英雄先烈是我们民族的脊梁，是我们不断开拓前进的勇气和力量所在。新华社《学习进行时》梳理了习近平总书记关于崇尚英雄、缅怀先烈的十句经典论述，与您分享，一同铭记。</p>
+	<button id="btn1">展开</button>
+	<span>
+		<a href="javascript:;">查找</a>
+		<a href="javascript:;">替换</a>
+	</span>
+</div>
+<div class="box1" id="box1">
+	<div class="btns" id="tab-btn">
+		<a class="active" href="javascript:;">查找</a>
+		<a href="javascript:;">替换</a>
+	</div>
+	<div class="ipts" id="ipts">
+		<div>
+			<input type="text"/>
+			<button>查找</button>
+		</div>
+		<div>
+			<input type="text"/>
+			<input type="text"/>
+			<button>替换</button>
+		</div>
+	</div>
+	<i>X</i>
+</div>
+</body>
+</html>

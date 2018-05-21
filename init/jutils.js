@@ -49,7 +49,7 @@ function shake(obj,attr,fn){
 	var arr = [];
 	var timer = null;
 	var pos = parseInt(getStyle(obj,attr));
-	for(var i = 20; i > 0; i -= 2){
+	for(var i = 20; i > 0; i -= 4){
 		arr.push(i,-i);
 	}
 	arr.push(0);
@@ -77,4 +77,16 @@ function toOpcity(object,fn){
 		object.style.opacity = num / 100;
 		fn && fn();
 	},30);
+}
+
+//检测输入的是否是数字
+function detectNum(str){
+	var n = 0;
+	for( var i = 0; i < str.length; i++ ){
+		n = str.charCodeAt(i);
+		if( n < 48 || n > 57 ){
+			return false;
+		}
+	}
+	return true;
 }

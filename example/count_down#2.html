@@ -158,10 +158,9 @@
 			var ulProduct = document.getElementById('product-area');
 			var liPro = ulProduct.getElementsByTagName('li');
 			var countPrice = document.getElementById('countPrice');
-			var arr = [];    //计算售罄商品的总价；
 
 			//倒计时部分
-			function countDown(obj,i){
+			function countDown(obj){
 				var div = obj.getElementsByTagName('div')[0];
 				var ipt = div.getElementsByTagName('input')[0];
 				var btn = div.getElementsByTagName('button')[0];
@@ -180,7 +179,9 @@
 						var t = Math.floor( ( oldTime - myTime ) / 1000 );
 						if( t < 1 ){
 							clearInterval( timer );
-							doMoveToOpcity(div,23,500,'top');
+							shake(div,'left',function(){
+								doMoveToOpcity(div,23,500,'top');
+							});
 							ulProduct.innerHTML += '<li><div class="pro-intro2 color">' + p1[1].innerHTML + '</div><div class="pro-price2 color">' + price + '</div><img src="' + img.src + '"/></li>';
 							countPrices();
 						}
@@ -223,7 +224,7 @@
 			<img src="img2/sellout.jpg" class="pic" />
 			<div class="pro-area">
 				<div>
-					<input type="text" value="May 20,2018 01:10:00"/>
+					<input type="text" value="May 20,2018 12:11:00"/>
 					<button>确定</button>
 				</div>
 				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
@@ -236,7 +237,7 @@
 			<img src="img2/sellout.jpg" class="pic" />
 			<div class="pro-area">
 				<div>
-					<input type="text" value="May 20,2018 01:10:00"/>
+					<input type="text" value="May 20,2018 02:01:05"/>
 					<button>确定</button>
 				</div>
 				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
@@ -249,7 +250,7 @@
 			<img src="img2/sellout.jpg" class="pic" />
 			<div class="pro-area">
 				<div>
-					<input type="text" value="May 20,2018 01:10:00"/>
+					<input type="text" value="May 20,2018 02:01:10"/>
 					<button>确定</button>
 				</div>
 				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
@@ -262,7 +263,7 @@
 			<img src="img2/sellout.jpg" class="pic" />
 			<div class="pro-area">
 				<div>
-					<input type="text" value="May 20,2018 01:10:00"/>
+					<input type="text" value="May 20,2018 02:01:15"/>
 					<button>确定</button>
 				</div>
 				<p class="limit-time">剩余：<span>00 天 00 时 00 分 00 秒</span></p>
