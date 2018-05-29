@@ -78,3 +78,51 @@ function toOpcity(object,fn){
 		fn && fn();
 	},30);
 }
+
+//检测输入的是否是数字
+function detectNum(str){
+	var n = 0;
+	for( var i = 0; i < str.length; i++ ){
+		n = str.charCodeAt(i);
+		if( n < 48 || n > 57 ){
+			return false;
+		}
+	}
+	return true;
+}
+
+//拖拽（单一div拖拽）
+function dragDiv(obj){
+	obj.onmousedown = function(e){
+		var e = e || event;
+		var disX = e.clientX - this.offsetLeft;
+		var disY = e.clientY - this.offsetTop;
+		if( obj.setCapture ){
+			obj.setCapture();
+		}
+		document.onmousemove = function(e){
+			var e = e || event;
+			var l = e.clientX - disX;
+			var t = e.clientY - disY;
+			if( l < 0 ){
+				l = 0;
+			}else if( l > document.documentElement.clientWidth - obj.offsetWidth){
+				l = document.documentElement.clientWidth - obj.offsetWidth;
+			}
+			if( t < 0 ){
+				t = 0;
+			}else if( t > document.documentElement.clientHeight - obj.offsetHeight){
+				t = document.documentElement.clientHeight - obj.offsetHeight;
+			}
+			obj.style.left = l + 'px';
+			obj.style.top = t + 'px';
+		}
+		document.onmouseup = function(){
+			document.onmousemove = document.onmouseup = null;
+			if( obj.releaseCapture ){
+				obj.releaseCapture();
+			}
+		}
+		return false;
+	}
+}
