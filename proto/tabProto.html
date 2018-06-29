@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		section{
+			margin:10px;
+		}
+		div{
+			width:100px;
+			height:100px;
+			border:1px solid #ccc;
+			padding:10px;
+			margin-top: 10px;
+			display: none;
+		}
+		input.cur{
+			background: red;
+		}
+	</style>
+	<script type="text/javascript">
+		window.onload = function(){
+
+			var tab = new Tab('div1');
+			tab.init();
+			var tab2 = new Tab('div2');
+			tab2.init();
+			var tab3 = new Tab('div3');
+			tab3.init();
+			tab3.autoPlay();
+
+		}
+
+		function Tab(id){
+			this.section = document.getElementById(id);
+			this.btn = this.section.getElementsByTagName('input');
+			this.div = this.section.getElementsByTagName('div');
+			this.num = 0;
+		}
+
+		Tab.prototype.init = function(){
+			var _this = this;
+			for( var i = 0; i < this.btn.length; i++ ){
+				this.btn[i].index = i;
+				this.btn[i].onclick = function(){
+					_this.change(this);
+				}
+			}
+		}
+
+		Tab.prototype.change = function(obj){
+			for( var i = 0; i < this.btn.length; i++ ){
+				this.btn[i].className = '';
+				this.div[i].style.display = 'none';
+			}
+			obj.className = 'cur';
+			this.div[obj.index].style.display = "block";
+		}
+
+		Tab.prototype.autoPlay = function(){
+			var _this = this;
+			setInterval(function(){
+				if( _this.num == _this.btn.length - 1 ){
+					_this.num = 0;
+				}else{
+					_this.num ++;
+				}
+
+				for( var i = 0; i < _this.btn.length; i++ ){
+					_this.btn[i].className = '';
+					_this.div[i].style.display = 'none';
+				}
+				_this.btn[_this.num].className = 'cur';
+				_this.div[_this.num].style.display = "block";
+
+			},1000);
+		}
+	</script>
+</head>
+<body>
+	<section id="div1">
+		<input type="button" name="" value="按钮一" class="cur" />
+		<input type="button" name="" value="按钮二"/>
+		<input type="button" name="" value="按钮三"/>
+		<input type="button" name="" value="按钮4"/>
+
+		<div style="display: block;">11</div>
+		<div>22</div>
+		<div>33</div>
+		<div>44</div>
+	</section>
+
+	<section id="div2">
+		<input type="button" name="" value="按钮一" class="cur" />
+		<input type="button" name="" value="按钮二"/>
+		<input type="button" name="" value="按钮三"/>
+
+		<div style="display: block;">11</div>
+		<div>22</div>
+		<div>33</div>
+	</section>
+
+	<section id="div3">
+		<input type="button" name="" value="按钮一" class="cur" />
+		<input type="button" name="" value="按钮二"/>
+		<input type="button" name="" value="按钮三"/>
+
+		<div style="display: block;">11</div>
+		<div>22</div>
+		<div>33</div>
+	</section>
+</body>
+</html>
