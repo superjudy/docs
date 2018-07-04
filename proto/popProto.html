@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding: 0;
+	}
+	input{
+		width: 60px;
+		height:30px;
+		line-height: 30px;
+	}
+	.login{
+		border:1px solid #ccc;
+		position: absolute;
+		background: #fff;
+		z-index: 2;
+	}
+	.title{
+		height:30px;
+		line-height: 30px;
+		background: gray;
+		overflow:hidden;
+		color:#fff;
+	}
+	.title p{
+		float: left;
+		margin-left: 5px;
+	}
+	.title span{
+		width: 24px;
+		text-align: center;
+		cursor: pointer;
+		float: right;
+	}
+	.title span i{
+		width:8px;
+		height:8px;
+		border:2px solid #fff;
+		display: inline-block;
+		margin-top:8px;
+	}
+	#mask{
+		width:100%;
+		height: 100%;
+		background: rgba(0,0,0,.5);
+		position: fixed;
+		left:0;
+		top:0;
+		z-index: 1;
+	}
+	.content{
+		font-size: 14px;
+		color:#333;
+		line-height: 30px;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var ipt = document.getElementsByTagName('input');
+		ipt[0].onclick = function(){
+			var d1 = new Dialog();
+			d1.init({
+				iNow: 1,
+				mask: true,
+				content: 'denglu zhong'
+			});
+		}
+		ipt[1].onclick = function(){
+			var d2 = new Dialog();
+			d2.init({
+				iNow: 2,
+				w: 300,
+				h: 400,
+				pos: 'rightdown',
+				title: 'news',
+				content: '新闻内容'
+			});
+		}
+	}
+
+	function Dialog(){
+		this.loginDiv = null;
+		this.mask = null;
+		this.settings = {
+			w: 300,
+			h: 300,
+			pos: 'center',
+			title: '登录',
+			mask: false,
+			content:''
+		}
+	}
+
+	Dialog.prototype.json = {}
+
+	Dialog.prototype.init = function(opt){
+		extend(this.settings, opt);
+		this.disX = 0;
+		this.disY = 0;
+
+		if(this.json[opt.iNow] == undefined){
+			this.json[opt.iNow] = true;
+		}
+		if(this.json[opt.iNow]){
+			this.create();
+			this.popClose();
+			this.popEnlarge();
+			if(this.settings.mask){
+				this.createMask();
+			}
+
+			this.json[opt.iNow] = false;		
+		}
+
+	}
+
+	Dialog.prototype.create = function(){
+		this.loginDiv = document.createElement('div');
+		this.loginDiv.className = 'login';
+		this.loginDiv.innerHTML = '	<div class="title"><p>'+ this.settings.title +'</p><span>X</span><span class="sp-enlarge"><i></i></span></div><div class="content">'+ this.settings.content +'</div>';
+		document.body.appendChild(this.loginDiv);
+
+		var _this = this;
+		this.loginDiv.onmousedown = function(){
+			var ev = ev || window.event;
+			_this.mouseDown(ev);
+			return false;
+		}
+
+		this.setData();
+	}
+
+	Dialog.prototype.setData = function(){
+		this.loginDiv.style.width = this.settings.w + 'px';
+		this.loginDiv.style.height = this.settings.h + 'px';
+		if(this.settings.pos == 'center'){
+			this.loginDiv.style.left = (oWidth() - this.loginDiv.offsetWidth)/2 + 'px';
+			this.loginDiv.style.top = (oHeight() - this.loginDiv.offsetHeight)/2 + 'px';
+		}else if(this.settings.pos == 'rightdown'){
+			this.loginDiv.style.left = oWidth() - this.loginDiv.offsetWidth + 'px';
+			this.loginDiv.style.top = oHeight() - this.loginDiv.offsetHeight + 'px';	
+		}
+	}
+
+	Dialog.prototype.popClose = function(){
+		var closeBtn = this.loginDiv.getElementsByTagName('span')[0];
+		var _this = this;
+		closeBtn.onclick = function(){
+			document.body.removeChild( _this.loginDiv );
+			if(_this.settings.mask){
+				document.body.removeChild( _this.mask );
+			}
+			_this.json[_this.settings.iNow] = true;
+		}
+	}
+
+	Dialog.prototype.popEnlarge = function(){
+		var enlargeBtn = this.loginDiv.getElementsByTagName('span')[1];
+		var _this = this;
+		enlargeBtn.onclick = function(){
+			_this.loginDiv.style.width = oWidth() + 'px';
+			_this.loginDiv.style.height = oHeight() + 'px';
+			_this.loginDiv.style.left = 0 + 'px';
+			_this.loginDiv.style.top = 0 + 'px';
+		}
+	}
+
+	Dialog.prototype.createMask = function(){
+		this.mask = document.createElement('div');
+		this.mask.id = 'mask';
+		document.body.appendChild(this.mask);
+	}
+
+	Dialog.prototype.mouseDown = function(ev){
+		var _this = this;
+		this.disX = ev.clientX - this.loginDiv.offsetLeft;
+		this.disY = ev.clientY - this.loginDiv.offsetTop;
+
+		document.onmousemove = function(){
+			var ev = ev || window.event;
+			_this.mouseMove(ev);
+		}
+
+		document.onmouseup = this.mouseUp;
+	}
+
+	Dialog.prototype.mouseMove = function(ev){
+		var l = ev.clientX - this.disX;
+		var t = ev.clientY - this.disY;
+
+		if( l < 0 ){
+			l = 0;
+		}else if( l > document.documentElement.clientWidth - this.loginDiv.offsetWidth ){
+			l = document.documentElement.clientWidth - this.loginDiv.offsetWidth;
+		}
+
+		if( t < 0 ){
+			t = 0;
+		}else if( t > document.documentElement.clientHeight - this.loginDiv.offsetHeight ){
+			t = document.documentElement.clientHeight - this.loginDiv.offsetHeight;
+		}
+
+		this.loginDiv.style.left = l + 'px';
+		this.loginDiv.style.top = t + 'px';
+	}
+
+	Dialog.prototype.mouseUp = function(){
+		document.onmousemove = null;
+		document.onmouseup = null;
+	}
+
+	function extend(obj1, obj2){
+		for(var attr in obj2){
+			obj1[attr] = obj2[attr];
+		}
+	}
+
+	function oWidth(){
+		return document.documentElement.clientWidth;
+	}
+
+	function oHeight(){
+		return document.documentElement.clientHeight;
+	}
+	</script>
+</head>
+<body>
+<input type="button" value="按钮1"/>
+<input type="button" value="按钮2"/>
+<input type="button" value="按钮3"/>
+</body>
+</html>
