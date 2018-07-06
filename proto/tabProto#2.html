@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		*{
+			margin:0;
+			padding:0;
+		}
+		input{
+			width: 60px;
+			height:30px;
+			line-height: 30px;
+			background: none;
+		}
+		input:first-child{
+			background: red;
+		}
+		#div1,
+		#div2,
+		#div3{
+			width: 220px;
+			height: 160px;
+			border:1px solid #ccc;
+			margin:10px;
+			padding:10px;
+		}
+		#div1 div,
+		#div2 div,
+		#div3 div{
+			width: 200px;
+			height:100px;
+			background: #ccc;
+			margin-top: 10px;
+			display: none;
+			padding:10px;
+		}
+	</style>
+	<script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var t1 = new Tab();
+			t1.init('div1',{});
+			var t2 = new Tab();
+			t2.init('div2',{
+				event: 'mouseenter'
+			});
+			var t3 = new Tab();
+			t3.init('div3',{
+				event: 'mouseenter',
+				delay: 200
+			});
+			t3.nowSel(2);
+		})
+
+		function Tab(){
+			this.oParent = null;
+			this.ipt = null;
+			this.div = null;
+
+			this.settings = {
+				event: 'click',
+				delay: 0
+			}
+		}
+
+		Tab.prototype.init = function(oParent, opt){
+			$.extend(this.settings, opt);
+			this.oParent = $('#' + oParent);
+			this.ipt = this.oParent.find('input');
+			this.div = this.oParent.find('div');
+
+			this.change();
+		}
+
+		Tab.prototype.change = function(){
+			var _this = this;
+			var timer = null;
+
+			this.ipt.on(this.settings.event, function(){
+				var that = this;
+				if( _this.settings.event == 'mouseenter' && _this.settings.delay ){
+					timer = setTimeout(function(){
+						showObj(that);
+					},_this.settings.delay);
+				}else{
+					showObj(this);
+				}			
+			}).mouseleave(function() {
+				clearTimeout(timer);
+			});
+
+			function showObj(obj){
+				_this.ipt.css('background','none');
+				$(obj).css('background','red');
+				_this.div.hide();
+				_this.div.eq($(obj).index()).show();
+			}
+		}
+
+		Tab.prototype.nowSel = function(index){
+			this.ipt.css('background','none');
+			this.ipt.eq(index).css('background','red');
+			this.div.hide();
+			this.div.eq(index).show();
+		}
+	</script>
+</head>
+<body>
+	<div id="div1">
+		<input type="button" value="按钮1"/>
+		<input type="button" value="按钮2"/>
+		<input type="button" value="按钮3"/>
+		<div style="display: block;">111111</div>
+		<div>222222</div>
+		<div>333333</div>
+	</div>
+	<div id="div2">
+		<input type="button" value="按钮1"/>
+		<input type="button" value="按钮2"/>
+		<input type="button" value="按钮3"/>
+		<div style="display: block;">111111</div>
+		<div>222222</div>
+		<div>333333</div>
+	</div>
+	<div id="div3">
+		<input type="button" value="按钮1"/>
+		<input type="button" value="按钮2"/>
+		<input type="button" value="按钮3"/>
+		<div style="display: block;">111111</div>
+		<div>222222</div>
+		<div>333333</div>
+	</div>
+</body>
+</html>

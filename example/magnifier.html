@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>放大镜</title>
+	<style type="text/css">
+	*{
+		margin:0;
+		padding:0;
+	}
+	#box{
+		width: 200px;
+		height: 150px;
+		overflow: hidden;
+		position: relative;
+	}
+	#box img{
+		width: 100%;
+	}
+	#box span{
+		width: 50px;
+		height: 50px;
+		background: rgba(255,204,0,.5);
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: none;
+	}
+	#mask{
+		width: 200px;
+		height: 150px;
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		background: transparent;
+	}
+	#box2{
+		width: 300px;
+		height: 225px;
+		position: absolute;
+		left:250px;
+		top:50px;
+		overflow:hidden;
+	}
+	#box2 img{
+		position: absolute;
+		left:0;
+		top:0;
+	}
+	</style>
+	<script type="text/javascript">
+	window.onload = function(){
+		var box = document.getElementById('box');
+		var span = box.getElementsByTagName('span')[0];
+		var box2 = document.getElementById('box2');
+		var img = box2.getElementsByTagName('img')[0];
+
+		box.onmouseenter = function(){
+			span.style.display = 'block';
+		}
+
+		box.onmouseleave = function(){
+			span.style.display = 'none';
+		}
+
+		box.onmousemove = function(){
+			var ev = ev || window.event;
+			var l = ev.clientX - box.offsetLeft - (span.offsetWidth/2);
+			var t = ev.clientY -box.offsetTop - (span.offsetHeight/2);
+			if( l < 0 ){
+				l = 0;
+			}else if( l > box.offsetWidth - span.offsetWidth ){
+				l = box.offsetWidth - span.offsetWidth;
+			}
+			if( t < 0 ){
+				t = 0;
+			}else if( l > box.offsetHeight - span.offsetHeight ){
+				t = box.offsetHeight - span.offsetHeight;
+			}
+			span.style.left = l + 'px';
+			span.style.top = t + 'px';
+
+			var scaleX = l / (box.offsetWidth - span.offsetWidth);
+			var scaleY = t / (box.offsetHeight - span.offsetHeight);
+
+			var imgL = img.offsetWidth - box2.offsetWidth;
+			var imgT = img.offsetHeight - box2.offsetHeight;
+
+			img.style.left = - imgL * scaleX + 'px';
+			img.style.top = - imgT * scaleY + 'px';
+		}
+	}
+	</script>
+</head>
+<body>
+<div id="box">
+	<img src="img/1.jpg"/>
+	<span></span>
+	<div id="mask"></div> <!-- ie兼容 -->
+</div>
+<div id="box2">
+	<img src="img2/4.jpg"/>
+</div>
+</body>
+</html>
