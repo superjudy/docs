@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>斐波那契数列</title>
+</head>
+<body>
+<script type="text/javascript">
+	//两数之和为后一个数，以此列推；
+	//如 1,1,2,3,5,8,13,21,34,55……
+	
+	function checkArith(num){
+		if(num <= 2){
+			return 1;
+		}
+		return checkArith(num - 1) + checkArith(num - 2)
+	}
+	console.log(checkArith(10))
+</script>
+</body>
+</html>

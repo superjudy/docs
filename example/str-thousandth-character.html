@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>给字符串加千分符</title>
+</head>
+<body>
+<script type="text/javascript">
+	var str = '1234567895';
+	function checkStr(str){
+		var num = str.length % 3;
+		var prev = '';
+		var now = 0;
+		var temp = '';
+		var arr = [];
+		if(num != 0){
+			prev = str.substring(0,num);
+			arr.push(prev);
+		}
+		str = str.substring(num);
+		for(var i = 0; i < str.length; i++){
+			now++;
+			temp += str[i];
+			if(now == 3 && temp){
+				arr.push(temp);
+				temp = '';
+				now = 0;
+			}
+		}
+		return arr.join(',');
+	}
+
+	console.log(checkStr(str))
+</script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<script type="text/javascript">
+	var t = '00111134353'
+	t = t/1000;
+	str = toMaxTen( Math.floor(t/86400) ) + " 天 " 
+			+ toMaxTen( Math.floor(t%86400/3600) ) + " 时 " 
+			+ toMaxTen( Math.floor(t%86400%3600/60) ) + " 分 " 
+			+ toMaxTen( t%60 ) + ' 秒 ';
+
+	//时间小于数字小于10，前面补一个0
+	function toMaxTen(n){
+		if( n < 10 ){
+			return '0' + n;
+		}else{
+			 return '' + n;
+		}
+	}
+
+	console.log(str)
+</script>
+</body>
+</html>

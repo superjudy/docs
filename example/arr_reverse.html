@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>回文数</title>
+</head>
+<body>
+<script type="text/javascript">
+//获取1-10000的回文数 类似121  1221  7887
+function checkArr(){
+	var arr = [];
+	for (var i = 1; i < 1000; i++) {
+		(function(i){
+			var num = i.toString();
+			var numArr = num.split('');
+			var revArr = num.split('').reverse();
+			var newArr = revArr.join('');
+
+			if( num == newArr ){
+				arr.push( num )
+			}
+		})(i);
+	}
+	return arr;
+}
+
+console.log(checkArr())
+</script>
+</body>
+</html>

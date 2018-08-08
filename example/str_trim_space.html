@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>去除字符串前后的空格</title>
+</head>
+<body>
+<script type="text/javascript">
+	var str = ' qwee qweeewes ';
+	//去掉收尾空格额
+	function checkStr(str){
+		return str.replace(/(^\s*)|(\s*$)/g, ''); 
+	}
+
+	// 去掉所有空格
+	// function checkStr(str){
+	// 	var arr = [];
+	// 	arr = str.split(' ');
+	// 	str = arr.join('');
+	// 	return str;
+	// }
+	console.log('11'+checkStr(str)+'11');
+</script>
+</body>
+</html>

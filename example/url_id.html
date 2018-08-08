@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>获得URL参数的值</title>
+</head>
+<body>
+<script type="text/javascript">
+	// var str = window.location.search;
+	var str = '?wd=%E5%9C%A8%E7%BA%BF%E7%BF%BB%E8%AF%91';
+	function checkUrl(str){
+		if(str.indexOf('?') != -1 ){
+			str = str.substring(1);
+		}
+		var arr = str.split('=');
+		for(var i in arr){
+			return wd = arr[1];
+		}
+		// return wd;
+	}
+	console.log(checkUrl(str))
+</script>
+</body>
+</html>

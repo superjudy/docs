@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>字符串出现次数最多的</title>
+</head>
+<body>
+<script type="text/javascript">
+var str = 'abfhsndjhjbsbdysgbnsbdsjsjssssssswwjkkmaksnank';
+function checkStr(str){
+	var obj = {};
+	var num = 0;
+	var val = '';
+	for(var i = 0; i < str.length; i++){
+		if(!obj[str[i]]){
+			obj[str[i]] = [];
+		}
+		obj[str[i]].push(str[i]);
+	}
+	for(var attr in obj){
+		if(num < obj[attr].length){
+			num = obj[attr].length;
+			val = obj[attr][0];
+		}
+	}
+	return val + '+' + num;
+}
+
+console.log(checkStr(str))
+</script>
+</body>
+</html>
